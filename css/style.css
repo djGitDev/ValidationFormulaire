@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #titre {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  
+  #formulaire {
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+  
+  input[type="text"]:focus,select:focus {
+    outline: none;
+    border: 1px solid #007bff;
+  }
+  
+  .boutton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .boutton:hover {
+    background-color: #0056b3;
+  }
+  
+  #error_message {
+    color: red;
+    display: none;
+  }
+  
+  #approuver_date, #approuver_valeurVehicule, #approuver_anneeVehicule, #approuver_kilometrageVehicule, #approuver_NombreReclamations, #approuver_MontantReclamations {
+    color: green;
+    display: none;
+  }
+  
+  #montant_total, #prime_mensuel {
+    font-weight: bold;
+  }
+    
+   #formulaire .ligne {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  #formulaire .ligne label {
+    flex: 1;
+    min-width : 80%;
+    max-width: 80%; 
+     margin-left: 10px;
+    text-align: left;
+  } 
+  
+  #formulaire .ligne input,
+  #formulaire .ligne select {
+    flex: 2;
+    text-align: left;
+    margin-right :10px;
+    padding: 5px;
+    max-width: 20%;
+  }
+
+  #formulaire .reclamations {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  #formulaire .reclamations label {
+    flex: 1;
+    max-width: 50%; 
+    margin-left: 100px;
+    text-align: left;
+  } 
+  
+  #formulaire .reclamations input {
+    flex: 2;
+    text-align: right;
+    margin-left :100px;
+    padding: 5px;
+    max-width: 50%;
+  }
+  
+  #formulaire .reclamations select {
+    flex: 2;
+    text-align: right;
+    margin-left :100px;
+    padding: 5px;
+    max-width: 10%;
+  }
+
+  
+  #confirmation {
+    margin: 10px 0;
+  }
+  .boutton[disabled] {
+    background-color: #a9a6a6;
+    color: #403b3b; 
+    cursor: not-allowed; 
+  }
+
+
+  
