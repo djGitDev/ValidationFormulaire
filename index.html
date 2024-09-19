@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulaire</title>
+    <script src="./jscypt/scrypt.js"></script>
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <form id="form1">
+      <div>
+        <label for="genre">Quel est votre genre? :</label>
+        <select id="genre" name="genre">
+          <option value="1">Masculin</option>
+          <option value="2">Feminin</option>
+          <option value="3">Autre</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <label for="date_de_naissance"
+          >Quel est votre date de naissance? :</label
+        >
+        <input
+          type="text"
+          id="date_de_naissance"
+          name="date_de_naissance"
+          placeholder="AAAA-MM-DD"
+          maxlength="10"
+          oninput="validerDateDeNaissance(this)"
+          onblur="masquerNotification('approuver_date')"
+        />
+        <span
+          id="erreur_date"
+          name="erreur_date"
+          style="color: red; display: none"
+          >Date invalide.</span
+        >
+        <span
+          id="approuver_date"
+          name="approuver_date"
+          style="color: green; display: none"
+          >Date valide.</span
+        >
+      </div>
+      <div>
+        <label for="valeur_vehicule"
+          >Quelle est la valeur d'achat de votre véhicule? :</label
+        >
+        <input
+          type="text"
+          id="valeur_vehicule"
+          name="valeur_vehicule"
+          placeholder="$"
+          maxlength="7"
+          oninput="validerValeurVehicule(this)"
+          onblur="masquerNotification('approuver_valeurVehicule')"
+        />
+        <span
+          id="erreur_valeurVehicule"
+          name="erreur_valeurVehicule"
+          style="color: red; display: none"
+          >Valeur du véhicule non admissible a l'assurance, le montant ne doit
+          pas exceder 100000$.</span
+        >
+        <span
+          id="approuver_valeurVehicule"
+          name="approuver_valeurVehicule"
+          style="color: green; display: none"
+          >Valeur du véhicule admissible.</span
+        >
+      </div>
+      <div>
+        <label for="valeur_vehicule"
+          >Quelle est l'année de fabrication de votre véhicule? :</label
+        >
+        <input
+          type="text"
+          id="annee_vehicule"
+          name="annee_vehicule"
+          placeholder="AAAA"
+          maxlength="4"
+          oninput="validerAnneeVehicule(this)"
+          onblur="masquerNotification('approuver_anneeVehicule')"
+        />
+        <span
+          id="erreur_anneeVehicule"
+          name="erreur_anneeVehicule"
+          style="color: red; display: none"
+          >Véhicule non admissible a l'assurance,ancienneté dépassant le nombre
+          d'année limite .</span
+        >
+        <span
+          id="approuver_anneeVehicule"
+          name="approuver_anneeVehicule"
+          style="color: green; display: none"
+          >Véhicule admissible.</span
+        >
+      </div>
+      <div>
+        <label for="kilomtrage_vehicule"
+          >• Combien de kilomètres parcourez-vous par année? :</label
+        >
+        <input
+          type="text"
+          id="kilometrge_vehicule"
+          name="kilometrage_vehicule"
+          placeholder="km"
+          maxlength="6"
+          oninput="validerKilometrage(this)"
+          onblur="masquerNotification('approuver_kilometrageVehicule')"
+        />
+        <span
+          id="erreur_kilometrageVehicule"
+          name="erreur_kilometrageVehicule"
+          style="color: red; display: none"
+          >Véhicule non admissible a l'assurance, exces de kilometrage par an
+          .</span
+        >
+        <span
+          id="approuver_kilometrageVehicule"
+          name="approuver_kilometrageVehicule"
+          style="color: green; display: none"
+          >Véhicule admissible.</span
+        >
+      </div>
+      <div>
+        <input type="checkbox" name="camera" checked="checked" value="1" />
+        <span>Votre véhicule possède une caméra de recul </span>
+      </div>
+      <div>
+        <label
+          >Avez-vous fait des réclamations d'assurance auto dans les 6 dernières
+          années?</label
+        ><br />
+        <input
+          type="radio"
+          id="reclamation_choix1"
+          name="reclamation"
+          value="1"
+          onclick="afficherReclamations(document.getElementsByClassName('class_reclamation'))"
+        />
+        <span>Oui</span>
+        <input
+          type="radio"
+          id="reclamation_choix2"
+          name="reclamation"
+          value="2"
+          onclick="masquerReclamations(document.getElementsByClassName('class_reclamation'))"
+        />
+        <span>Non</span>
+      </div>
+      <div>
+        <label
+          class="class_reclamation"
+          for="nombre_reclamation"
+          style="display: none"
+          >Combien de réclamations avez-vous faites? :</label
+        >
+        <select
+          class="class_reclamation"
+          id="nombre_reclamation"
+          name="nombre_reclamation"
+          style="display: none"
+          onchange="afficherCasesMontantReclamations(this);validerNombreReclamations(this);"
+        >
+          <option value="0"></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 ou plus</option>
+        </select>
+        <span
+          id="erreur_NombreReclamations"
+          name="erreur_NombreReclamations"
+          style="color: red; display: none"
+          >Vehicule non admissible a l'assurance, nombre de reclamations
+          exagéré.
+        </span>
+        <span
+          id="approuver_NombreReclamations"
+          name="approuver_NombreReclamations"
+          style="color: green; display: none"
+        >
+          nombre de reclamations correcte.
+        </span>
+      </div>
+      <div>
+        <label class="#1" style="display : none"for="montant_reclamation1"> #1 :</label>
+        <input
+          type="text"
+          class="#1"
+          id="montant_reclamation1"
+          name="montant_reclamation1"
+          placeholder="$"
+          maxlength="6"
+          style="display: none"
+          oninput="validerMontantReclamation(this)"
+          onblur="masquerNotification('approuver_montant_reclamation')"
+        />
+      </div>
+      <div>
+        <label class="#2" style="display : none"for="montant_reclamation2"> #2 :</label>
+
+        <input
+          type="text"
+          class="#2"
+          id="montant_reclamation2"
+          name="montant_reclamation2"
+          placeholder="$"
+          maxlength="6"
+          style="display: none"
+          oninput="validerMontantReclamation(this)"
+          onblur="masquerNotification('approuver_montant_reclamation')"
+        />
+      </div>
+      <div>
+        <label class="#3" style="display : none"for="montant_reclamation3"> #3 :</label>
+
+        <input
+          type="text"
+          class="#3"
+          id="montant_reclamation3"
+          name="montant_reclamation3"
+          placeholder="$"
+          maxlength="6"
+          style="display: none"
+          oninput="validerMontantReclamation(this)"
+          onblur="masquerNotification('approuver_montant_reclamation')"
+        />
+      </div>
+      <div>
+        <label class="#4" style="display : none"for="montant_reclamation4"> #4 :</label>
+
+        <input
+          type="text"
+          class="#4"
+          id="montant_reclamation4"
+          name="montant_reclamation4"
+          placeholder="$"
+          maxlength="6"
+          style="display: none"
+          onblur="masquerNotification('approuver_montant_reclamation')"
+          oninput="validerMontantReclamation(this)"
+        />
+      </div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+
+      <!-- <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required />
+        <span id="erreur_nom">le nom saisie est invalide</span>
+        <br />
+      </div>
+
+      <div>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required />
+        <span id="error_prenom">le prenom saisie est invalide</span>
+        <br />
+      </div>
+
+      <div>
+        <label for="email">Adresse Email :</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div>
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" name="telephone" />
+      </div>
+
+      <div>
+        <label for="disponibilite">Disponibilité :</label>
+        <select id="disponibilite" name="disponibilite">
+          <option value="weekends">Weekends</option>
+          <option value="jours_ouvres">Jours ouvrés</option>
+          <option value="soirees">Soirées</option>
+          <option value="flexible">Flexible</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" rows="3" cols="30"></textarea>
+      </div> -->
+
+      <div>
+        <input type="submit" value="Soumettre" />
+      </div>
+    </form>
+    <!-- <script>
+      switch (parseInt(document.getElementById("nombre_reclamation").value)) {
+        case 4:
+          document.getElementById("montant_reclamation4").style.display =
+            "block";
+        case 3:
+          document.getElementById("montant_reclamation3").style.display =
+            "block";
+        case 2:
+          document.getElementById("montant_reclamation2").style.display =
+            "block";
+        case 1:
+          document.getElementById("montant_reclamation1").style.display =
+            "block";
+          break;
+      }
+    </script> -->
+  </body>
+</html>
